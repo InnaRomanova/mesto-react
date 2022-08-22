@@ -1,19 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import avatarEdit from '../images/ava.gif';
+import Card from "./Card.js";
 
 function Main(props) {
-    // function handleEditAvatarClick() {
-    //     document.querySelector('#popup__avatar-edit').classList.add('popup_opened');
-    // };
-
-    // function handleEditProfileClick() {
-    //     document.querySelector('#popup-profile').classList.add('popup_opened');
-    // };
-
-    // function handleAddPlaceClick() {
-    //     document.querySelector('.popup-photo').classList.add('popup_opened');
-    // };
-
+    const [userName, setUserName, userAvatar] = useState('');
+  
     return (
         <main className="content">
             <section className="profile" type="button">

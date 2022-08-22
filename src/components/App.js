@@ -213,7 +213,7 @@ function App() {
             </button>
           </form>
   </div>*/}
-
+<ImagePopup  card={selectCard} onClose={closeAllPopups} />
       </body>
     </>
   )
