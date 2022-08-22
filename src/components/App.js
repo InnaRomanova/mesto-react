@@ -1,19 +1,18 @@
 //корневой компонент
 
-import React from 'react';
+import React,{useState} from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js'
 import Card from './Card.js';
 import ImagePopup from './ImagePopup.js';
-import { useState } from 'react';
-
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarClick] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfileClick] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlaceClick] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfileClick] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlaceClick] = useState(false);
+  const [selectCard, setSelectCard] = useState({});
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -29,8 +28,7 @@ function App() {
     setIsAddPlaceClick(true);
   }
 
-  const [selectCard, setSelectCard] = React.useState({});
-
+  
   const handleClickOnPopup = (e) => {
     if (e.target.classList.contains('popup') || e.target.classList.contains('popup__close-button')) {
       //закрытие попапа по клику на оверлей либо по клику на крестик
@@ -49,7 +47,7 @@ function App() {
     <>
       <body className="page">
 
-        <div class="page__wrapper">
+        <div className="page__wrapper">
           <Header />
           <Main onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
@@ -60,12 +58,12 @@ function App() {
 
         <PopupWithForm isOpen={isEditProfilePopupOpen} name="profile" title="Редактировать профиль"
           onClose={closeAllPopups}>
-          <div className="popup__container">
+          {/* <div className="popup__container">
             <button
               className="popup__close-button"
               id="close-button"
               type="button"
-              value="close" />
+              value="close" /> */}
             <form
               className="form"
               id="form_profile"
@@ -73,7 +71,7 @@ function App() {
               method="post"
               action="#"
               noValidate="">
-              <h2 className="form__title">Редактировать профиль</h2>
+              {/* <h2 className="form__title">Редактировать профиль</h2> */}
               <fieldset className="form__user" id="profile__fields">
                 <input
                   className="form__item"
@@ -100,21 +98,21 @@ function App() {
                   required="" />
                 <span className="form__item-error" id="profile__about-error" />
               </fieldset>
-              <button
+              {/* <button
                 className="form__button"
                 id="form__button__profile"
                 type="submit"
                 name="profile__save"
                 value="Сохранить">
                 Сохранить
-              </button>
+              </button> */}
             </form>
-          </div>
+          {/* </div> */}
         </PopupWithForm>
 
         <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar" onClose={closeAllPopups}>
-          <div className="popup__container">
-            <button className="popup__close-button" id="avatar-close-button" />
+          {/* <div className="popup__container">
+            <button className="popup__close-button" id="avatar-close-button" /> */}
             <form
               className="form"
               id="form-avatar"
@@ -132,25 +130,25 @@ function App() {
                   required="" />
                 <span className="form__item-error" id="avatar__image-error" />
               </fieldset>
-              <button
+              {/* <button
                 className="form__button"
                 id="form__button__avatar"
                 type="submit"
                 name="avatar__save"
                 value="Сохранить">
                 Сохранить
-              </button>
+              </button> */}
             </form>
-          </div>
+          {/* </div> */}
         </PopupWithForm>
-
+        {console.log(isAddPlacePopupOpen)}
         <PopupWithForm isOpen={isAddPlacePopupOpen} name="addPhoto" onClose={closeAllPopups}>
-          <div className="popup__container">
+          {/* <div className="popup__container">
             <button
               className="popup__close-button"
               id="close-Btn"
               type="button"
-              value="close" />
+              value="close" /> */}
             <form
               className="form"
               id="form_photo"
@@ -167,7 +165,7 @@ function App() {
                   name="name"
                   placeholder="Название"
                   minLength="2"
-                  maxLength="3"
+                  maxLength="300"
                   required="" />
                 <span className="form__item-error" id="elements__name-error" />
                 <input
@@ -179,16 +177,16 @@ function App() {
                   required="" />
                 <span className="form__item-error" id="elements__image-error" />
               </fieldset>
-              <button
+              {/* <button
                 className="form__button"
                 id="form__button__photo"
                 type="submit"
                 name="profile__save"
                 value="Сохранить">
                 Сохранить
-              </button>
+              </button> */}
             </form>
-          </div>
+          {/* </div> */}
         </PopupWithForm>
 
         <PopupWithForm name="confirmation" title="Вы уверены?" buttonText="Да" />

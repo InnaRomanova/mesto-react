@@ -34,7 +34,7 @@ function Main(props) {
                 </div>
                 <button
                     className="profile__add-button"
-                    onClick={props.onCardClick}
+                    onClick={props.onAddPlace}
                     type="button"
                     title="Добавить фотографию" />
             </section>
