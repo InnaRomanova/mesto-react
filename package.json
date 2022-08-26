@@ -39,13 +39,5 @@
   "main": "index.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/InnaRomanova/mesto-react.git"
-  },
-  "bugs": {
-    "url": "https://github.com/InnaRomanova/mesto-react/issues"
-  },
-  "homepage": "https://github.com/InnaRomanova/mesto-react#readme"
+  "license": "ISC"
 }
