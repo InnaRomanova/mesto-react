@@ -1,7 +1,8 @@
 class Api {
-    constructor({url, headers}) {
-        this._headers = headers;
-        this._url = url;
+    constructor({baseURL, token, cohort}) {
+        this._baseURL = baseURL;
+        this._token = token;
+        this._cohort = cohort;
     }
 
     _checkResponse(res) {
@@ -83,7 +84,7 @@ class Api {
 }
 
 const newApi = new Api ({
-    baseURL: 'https://mesto.nomoreparties.co/v1/',
+    baseURL: 'https://mesto.nomoreparties.co/v1',
     token: '6317d273-77cd-40e4-acd5-6cbb113af6b1',
     cohort: 'cohort-47'
 })

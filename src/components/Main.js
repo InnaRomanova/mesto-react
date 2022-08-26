@@ -3,7 +3,7 @@ import avatarEdit from '../images/ava.gif';
 import Card from "./Card.js";
 
 function Main(props) {
-    const [userName, setUserName, userAvatar] = useState('');
+    // const [userName, setUserName, userAvatar] = useState('');
   
     return (
         <main className="content">
