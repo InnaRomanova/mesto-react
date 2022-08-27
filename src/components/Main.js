@@ -1,36 +1,67 @@
-import React, { useState } from "react";
-import avatarEdit from '../images/ava.gif';
+import React, { useState, useEffect } from "react";
 import Card from "./Card.js";
+import newApi from "../utils/Api";
 
-function Main(props) {
-    // const [userName, setUserName, userAvatar] = useState('');
-  
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+    const [userName, setUserName] = useState('');
+    const [userDescription, setUserDescription] = useState('');
+    const [userAvatar, setuserAvatar] = useState('');
+    const [cards, setCards] = useState([])
+
+    useEffect(() => {
+        newApi.getUserInfo()
+            .then(({ name, about, avatar }) => {
+                setUserName(name);
+                setUserDescription(about);
+                setuserAvatar(avatar);
+                console.log(userAvatar)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, []);
+
+    useEffect(() => {
+        newApi.getCards()
+            .then((cards) => {
+                setCards(cards);
+                console.log(cards)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
+
     return (
         <main className="content">
             <section className="profile" type="button">
-                <button className="profile__avatar-edit-button" onClick={props.onEditAvatar}>
+                <button className="profile__avatar-edit-button" onClick={onEditAvatar}>
                     <img
                         className="profile__image profile__image_avatar"
-                        src={avatarEdit}
+                        src={userAvatar}
                         alt="аватар" />
                 </button>
                 <div className="profile__info">
-                    <h1 className="profile__name" />
+                    <h2 className="profile__name">{userName}</h2>
                     <button
                         className="profile__edit-button"
-                        onClick={props.onEditProfile}
+                        onClick={onEditProfile}
                         type="button"
                         title="Редактировать" />
-                    <p className="profile__about" />
+                    <p className="profile__about">{userDescription}</p>
                 </div>
                 <button
                     className="profile__add-button"
-                    onClick={props.onAddPlace}
+                    onClick={onAddPlace}
                     type="button"
                     title="Добавить фотографию" />
             </section>
             <section className="elements">
-                <ul className="elements__contain" />
+                <ul class="elements__contain">
+                    {cards.map((card) => {
+                        return (<Card key={card._id} card={card} onCardClick={onCardClick} />)
+                    })}
+                </ul>
             </section>
         </main>
     )
