@@ -14,7 +14,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                 setUserName(name);
                 setUserDescription(about);
                 setuserAvatar(avatar);
-                console.log(userAvatar)
             })
             .catch((error) => {
                 console.log(error)
@@ -25,7 +24,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         newApi.getCards()
             .then((cards) => {
                 setCards(cards);
-                console.log(cards)
             })
             .catch((error) => {
                 console.log(error)

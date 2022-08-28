@@ -1,6 +1,6 @@
 //корневой компонент
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -14,8 +14,8 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfileClick] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlaceClick] = useState(false);
   const [selectCard, setSelectCard] = useState({});
-  const [userName, setUserName] = useState('а');
-  const [userAvatar, setUserAvatar] = useState('kkk');
+  const [userName, setUserName] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -29,7 +29,6 @@ function App() {
   const handleAddPlaceClick = () => {
     setIsAddPlaceClick(true);
   }
-
 
   const handleClickOnPopup = (e) => {
     if (e.target.classList.contains('popup') || e.target.classList.contains('popup__close-button')) {
@@ -45,24 +44,10 @@ function App() {
     setSelectCard({});
   }
 
-  useEffect(() => {
-    Promise.all([newApi.getCards()])
-      .then(([cardData]) => {
-        console.log(cardData.name);
-        setUserName(cardData.name);
-        setUserAvatar(cardData.avatar);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, []
-  )
-
   return (
     <body className="page">
       <div className="page__wrapper">
         <Header />
-        
         <Main onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -71,8 +56,8 @@ function App() {
       </div>
 
       <PopupWithForm isOpen={isEditProfilePopupOpen} name="profile" title="Редактировать профиль"
-        onClose={closeAllPopups}>
-        <form
+        onClose={closeAllPopups}
+        children={<form
           className="form"
           id="form_profile"
           name="profile"
@@ -105,11 +90,11 @@ function App() {
               required="" />
             <span className="form__item-error" id="profile__about-error" />
           </fieldset>
-        </form>
+        </form>}>
       </PopupWithForm>
 
-      <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar" onClose={closeAllPopups}>
-        <form
+      <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar" onClose={closeAllPopups}
+        children={<form
           className="form"
           id="form-avatar"
           name="avatar"
@@ -126,40 +111,39 @@ function App() {
               required="" />
             <span className="form__item-error" id="avatar__image-error" />
           </fieldset>
-        </form>
+        </form>}>
       </PopupWithForm>
-      {console.log(isAddPlacePopupOpen)}
-      <PopupWithForm isOpen={isAddPlacePopupOpen} name="addPhoto" onClose={closeAllPopups}>
-        <form
-          className="form"
-          id="form_photo"
-          name="addPhoto"
-          method="post"
-          action="#"
-          noValidate="">
-          <h2 className="form__title">Новое место</h2>
-          <fieldset className="form__user">
-            <input
-              className="form__item"
-              type="text"
-              id="elements__name"
-              name="name"
-              placeholder="Название"
-              minLength="2"
-              maxLength="300"
-              required="" />
-            <span className="form__item-error" id="elements__name-error" />
-            <input
-              className="form__item"
-              type="url"
-              id="elements__image"
-              name="link"
-              placeholder="Ссылка на картинку"
-              required="" />
-            <span className="form__item-error" id="elements__image-error" />
-          </fieldset>
-        </form>
-      </PopupWithForm>
+      <PopupWithForm isOpen={isAddPlacePopupOpen} name="addPhoto" onClose={closeAllPopups}
+      children={<form
+        className="form"
+        id="form_photo"
+        name="addPhoto"
+        method="post"
+        action="#"
+        noValidate="">
+        <h2 className="form__title">Новое место</h2>
+        <fieldset className="form__user">
+          <input
+            className="form__item"
+            type="text"
+            id="elements__name"
+            name="name"
+            placeholder="Название"
+            minLength="2"
+            maxLength="300"
+            required="" />
+          <span className="form__item-error" id="elements__name-error" />
+          <input
+            className="form__item"
+            type="url"
+            id="elements__image"
+            name="link"
+            placeholder="Ссылка на картинку"
+            required="" />
+          <span className="form__item-error" id="elements__image-error" />
+        </fieldset>
+      </form>}>
+        </PopupWithForm>
 
       <PopupWithForm name="confirmation" title="Вы уверены?" buttonText="Да" />
       <ImagePopup card={selectCard} onClose={closeAllPopups} />
