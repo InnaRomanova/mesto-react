@@ -18,6 +18,7 @@ function App() {
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [liked, setLiked] = useState(false);
+ 
   const [userName, setUserName] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
 
@@ -71,7 +72,8 @@ function App() {
             cards={cards}
             setCards={setCards}
             liked={liked}
-            setLiked={setLiked} />
+            setLiked={setLiked}
+            onCardDelete={} />
           <Footer />
         </div>
 
