@@ -17,12 +17,15 @@
 @import url(../blocks/elements/__contain/elements__contain.css);
 @import url(../blocks/elements/__block/elements__block.css);
 @import url(../blocks/elements/__button-delete/elements__button-delete.css);
+@import url(../blocks/elements/__button-delete/card__delete-button_visible.css);
+@import url(../blocks/elements/__button-delete/card__delete-button_hidden.css);
 @import url(../blocks/elements/__image/elements__image.css);
 @import url(../blocks/elements/__name/elements__name.css);
 @import url(../blocks/elements/__item/elements__item.css);
 @import url(../blocks/elements/__like-wrapper/elements__like-wrapper.css);
 @import url(../blocks/elements/__button-like/elements__button-like.css);
 @import url(../blocks/elements/__button-like/_active/elements__button-like_active.css);
+
 @import url(../blocks/elements/__like-counters/elements__like-counters.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

@@ -34,6 +34,10 @@ class Api {
   getCards() {
     return this._request('/cards', 'GET')
   }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    return this._request(`cards/likes/${cardId}`, isLiked? 'DELETE' : 'PUT') 
+  }
 }
 const newApi = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1',
