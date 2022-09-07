@@ -31,12 +31,24 @@ class Api {
     return this._request('users/me', 'GET')
   }
 
+  editUserInfo(userInfo) {
+    return this._request('users/me', 'RATCH', userInfo)
+  }
+
+  editAvatar(avatarInfo) {
+    return this._request('users/me/avatar', 'PATCH', avatarInfo)
+  }
+
   getCards() {
     return this._request('/cards', 'GET')
   }
 
   changeLikeCardStatus(cardId, isLiked) {
     return this._request(`cards/likes/${cardId}`, isLiked? 'DELETE' : 'PUT') 
+  }
+
+  changeDeleteCardStatus(id) {
+    return this._request(`cards/${id}`, 'DELETE')
   }
 }
 const newApi = new Api({

@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import newApi from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setCards, setLiked, liked, onCardDelete }) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setCards, setLiked, liked, setDeleteCard }) {
     const currentUser = React.useContext(CurrentUserContext);
 
     function handleCardLike(card) {
@@ -14,15 +14,19 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setC
         newApi.changeLikeCardStatus(card._id, isLiked)
         .then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        });
+        }).catch((err) => {
+            console.error(err);
+          });
     }
     
     function handleCardDelete(card) {
-        const isOwn = card.owner._id === '8ee3c4ebefdf8ecffa7150ce';
+        const isOwn = card.owner._id === '4c642fb9acc10e2d4d15adcd';
         newApi.changeDeleteCardStatus(card._id)
         .then((newCard) => {
             setCards((cards) => cards.filter((c) => c._id !== card._id));
-        });
+        }).catch((err) => {
+            console.error(err);
+          });
     }
     
     return (
@@ -54,7 +58,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setC
                     {cards.map((card) => {
                         return (<Card key={card._id} card={card} 
                             onCardClick={onCardClick} onCardLike={handleCardLike} liked={liked} setLiked={setLiked}
-                            onCardDelete={onCardDelete} />)
+                            setDeleteCard={setDeleteCard} />)
                     })}
                 </ul>
             </section>

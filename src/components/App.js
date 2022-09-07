@@ -7,8 +7,9 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js'
 import ImagePopup from './ImagePopup.js';
 import newApi from '../utils/Api';
+import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarClick] = useState(false);
@@ -18,7 +19,8 @@ function App() {
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [liked, setLiked] = useState(false);
- 
+  const [deleteCard, setDeleteCard] = useState(false);
+  const [showCollection, setShowCollection] = useState(cards);
   const [userName, setUserName] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
 
@@ -42,11 +44,25 @@ function App() {
     }
   }
 
+  const handleUpdateUser = (user) => {
+    newApi.editUserInfo(user)
+    api.setUserInfo(user)
+    .then((newData) => {
+      setСurrentUser(newData);
+      setIsEditProfileClick(false);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+  console.log(cards)
+
   const closeAllPopups = () => {
     setIsEditAvatarClick(false);
     setIsEditProfileClick(false);
     setIsAddPlaceClick(false);
     setSelectCard({});
+    setDeleteCard(false);
   }
 
   useEffect(() => {
@@ -55,10 +71,19 @@ function App() {
         setCards(cards);
         setСurrentUser(userData)
       })
-      .catch((error) => {
-        console.log(error)
+      .catch((err) => {
+        console.error(err);
       })
   }, [liked]);
+
+  useEffect(() => {
+    Promise.all([newApi.changeDeleteCardStatus(deleteCard._id)])
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== deleteCard._id));
+      }).catch((err) => {
+        console.error(err);
+      });
+  }, [deleteCard])
 
   return (
     <body className="page">
@@ -73,11 +98,15 @@ function App() {
             setCards={setCards}
             liked={liked}
             setLiked={setLiked}
-            onCardDelete={} />
+            setDeleteCard={setDeleteCard} />
           <Footer />
         </div>
 
-        <PopupWithForm isOpen={isEditProfilePopupOpen} name="profile" title="Редактировать профиль"
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser} />
+        {/* <PopupWithForm isOpen={isEditProfilePopupOpen} name="profile" title="Редактировать профиль"
           onClose={closeAllPopups}
           children={<form
             className="form"
@@ -113,9 +142,12 @@ function App() {
               <span className="form__item-error" id="profile__about-error" />
             </fieldset>
           </form>}>
-        </PopupWithForm>
-
-        <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar" onClose={closeAllPopups}
+        </PopupWithForm> */}
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser} />
+        {/* <PopupWithForm isOpen={isEditAvatarPopupOpen} name="avatar" onClose={closeAllPopups}
           children={<form
             className="form"
             id="form-avatar"
@@ -134,7 +166,7 @@ function App() {
               <span className="form__item-error" id="avatar__image-error" />
             </fieldset>
           </form>}>
-        </PopupWithForm>
+        </PopupWithForm> */}
         <PopupWithForm isOpen={isAddPlacePopupOpen} name="addPhoto" onClose={closeAllPopups}
           children={<form
             className="form"
