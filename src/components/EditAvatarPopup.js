@@ -6,10 +6,9 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateAvatar({
-            avatar: ({ avatar: avatarRef.current.value }) /* Значение инпута, полученное с помощью рефа */
-        })
-    }
+        onUpdateAvatar({ avatar: avatarRef.current.value }); /* Значение инпута, полученное с помощью рефа */
+        }
+    
 
     return (
         <PopupWithForm isOpen={isOpen} name="avatar" onClose={onClose} onSubmit={handleSubmit}

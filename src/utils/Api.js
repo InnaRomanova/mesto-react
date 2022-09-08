@@ -32,7 +32,7 @@ class Api {
   }
 
   editUserInfo(userInfo) {
-    return this._request('users/me', 'RATCH', userInfo)
+    return this._request('users/me', 'PATCH', userInfo)
   }
 
   editAvatar(avatarInfo) {
@@ -41,6 +41,10 @@ class Api {
 
   getCards() {
     return this._request('/cards', 'GET')
+  }
+
+  setNewCard(data) {
+    return this._request('/cards', 'POST', data)
   }
 
   changeLikeCardStatus(cardId, isLiked) {
