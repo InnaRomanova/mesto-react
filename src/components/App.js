@@ -48,57 +48,58 @@ function App() {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
+
     // Отправляем запрос в API и получаем обновлённые данные карточки
     newApi.changeLikeCardStatus(card._id, isLiked)
-    .then((newCard) => {
+      .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    }).catch((err) => {
+      }).catch((err) => {
         console.error(err);
       });
-}
+  }
 
-function handleCardDelete(card) {
+  function handleCardDelete(card) {
     const isOwn = card.owner._id === currentUser._id;
     newApi.changeDeleteCardStatus(card._id)
-    .then((newCard) => {
+      .then((newCard) => {
         setCards((cards) => cards.filter((c) => c._id !== card._id));
-    }).catch((err) => {
+      }).catch((err) => {
         console.error(err);
       });
-}
+  }
 
   const handleAddPlaceSubmit = (card) => {
     newApi.setNewCard(card)
-    .then((newCard) => {
-      setCards([newCard, ...cards]);
-      setIsAddPlaceClick(false);
-    })
-    .catch((err) => {
-      console.error(err);
-  })
-}
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        setIsAddPlaceClick(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
 
   const handleUpdateAvatar = (avatarData) => {
     newApi.editAvatar(avatarData)
-    .then((newData) => {
-      setСurrentUser(newData);
-      setIsEditAvatarClick(false);
-    })
-    .catch((err) => {
-      console.error(err);
-  })}
+      .then((newData) => {
+        setСurrentUser(newData);
+        setIsEditAvatarClick(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
 
   const handleUpdateUser = (user) => {
     newApi.editUserInfo(user)
-    // api.setUserInfo(user)
-    .then((newData) => {
-      setСurrentUser(newData);
-      setIsEditProfileClick(false);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+      // api.setUserInfo(user)
+      .then((newData) => {
+        setСurrentUser(newData);
+        setIsEditProfileClick(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
   console.log(cards)
 
@@ -141,9 +142,8 @@ function handleCardDelete(card) {
             onCardClick={handleCardClick}
             cards={cards}
             setCards={setCards}
-            liked={liked}
-            setLiked={setLiked}
-            setDeleteCard={setDeleteCard} />
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete} />
           <Footer />
         </div>
 
@@ -151,47 +151,16 @@ function handleCardDelete(card) {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser} />
-      
+
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser} />
-       
-       <AddPlacePopup
-       isOpen={isAddPlacePopupOpen}
-       onClose={closeAllPopups}
-       onAddPlace={handleAddPlaceSubmit} />
-        {/* <PopupWithForm isOpen={isAddPlacePopupOpen} name="addPhoto" onClose={closeAllPopups}
-          children={<form
-            className="form"
-            id="form_photo"
-            name="addPhoto"
-            method="post"
-            action="#"
-            noValidate="">
-            <h2 className="form__title">Новое место</h2>
-            <fieldset className="form__user">
-              <input
-                className="form__item"
-                type="text"
-                id="elements__name"
-                name="name"
-                placeholder="Название"
-                minLength="2"
-                maxLength="300"
-                required="" />
-              <span className="form__item-error" id="elements__name-error" />
-              <input
-                className="form__item"
-                type="url"
-                id="elements__image"
-                name="link"
-                placeholder="Ссылка на картинку"
-                required="" />
-              <span className="form__item-error" id="elements__image-error" />
-            </fieldset>
-          </form>}>
-        </PopupWithForm> */}
+          onUpdateAvatar={handleUpdateAvatar} />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit} />
 
         <PopupWithForm name="confirmation" title="Вы уверены?" buttonText="Да" />
         <ImagePopup card={selectCard} onClose={closeAllPopups} />

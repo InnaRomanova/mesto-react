@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import newApi from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setCards, setLiked, liked, setDeleteCard, onCardLike }) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardDelete, onCardLike }) {
     const currentUser = React.useContext(CurrentUserContext);
 
     // function handleCardLike(card) {
@@ -57,8 +57,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, setC
                 <ul class="elements__contain">
                     {cards.map((card) => {
                         return (<Card key={card._id} card={card} 
-                            onCardClick={onCardClick} onCardLike={onCardLike} liked={liked} setLiked={setLiked}
-                            setDeleteCard={setDeleteCard} />)
+                            onCardClick={onCardClick} onCardLike={onCardLike}
+                            onCardDelete={onCardDelete} />)
                     })}
                 </ul>
             </section>

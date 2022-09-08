@@ -6,8 +6,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [value, setValue] = React.useState('');
-  // Подписка на контекст
-  const currentUser = React.useContext(CurrentUserContext);
+   const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -17,13 +16,16 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   }, [currentUser]);
 
   // Обработчик изменения инпута обновляет стейт
-  function handleChange(e) {
+  function handleChangeName(e) {
     setName(e.target.value);
   }
 
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
+  }
+
   function handleSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
-    e.preventDefault();
+    e.preventDefault();// Запрещаем браузеру переходить по адресу формы
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name, 
@@ -50,10 +52,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             placeholder="Введите ваше имя"
             autoComplete="off"
             defaultValue=""
+            value={name || ''}
             minLength="2"
             maxLength="40"
             required=""
-            onChange={handleChange} />
+            onChange={handleChangeName} />
           <span className="form__item-error" id="profile__name-error" />
           <input
             className="form__item"
@@ -65,8 +68,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             maxLength="200"
             autoComplete="off"
             defaultValue=""
+            value={description || ''}
             required=""
-            onChange={handleChange} />
+            onChange={handleChangeDescription} />
           <span className="form__item-error" id="profile__about-error" />
         </fieldset>
       </form>}

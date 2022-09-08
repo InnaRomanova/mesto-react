@@ -5,10 +5,10 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const avatarRef = React.useRef()
 
     function handleSubmit(e) {
+        console.log(avatarRef.current.value)
         e.preventDefault();
         onUpdateAvatar({ avatar: avatarRef.current.value }); /* Значение инпута, полученное с помощью рефа */
-        }
-    
+    }
 
     return (
         <PopupWithForm isOpen={isOpen} name="avatar" onClose={onClose} onSubmit={handleSubmit}
@@ -21,7 +21,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                 <h2 className="form__title">Обновить аватар</h2>
                 <fieldset className="form__user" id="avatar__fields">
                     <input
-
                         className="form__item"
                         id="avatar__image"
                         name="url"
