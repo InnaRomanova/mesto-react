@@ -6,7 +6,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [value, setValue] = React.useState('');
-   const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
+  const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -28,7 +28,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     e.preventDefault();// Запрещаем браузеру переходить по адресу формы
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name, 
+      name,
       about: description,
     });
   }

@@ -3,31 +3,9 @@ import Card from "./Card.js";
 import newApi from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardDelete, onCardLike }) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardDelete, 
+    onCardLike, onDeletePopup, onConfirmDelete, setDeleteCard }) {
     const currentUser = React.useContext(CurrentUserContext);
-
-    // function handleCardLike(card) {
-    //     // Снова проверяем, есть ли уже лайк на этой карточке
-    //     const isLiked = card.likes.some(i => i._id === currentUser._id);
-        
-    //     // Отправляем запрос в API и получаем обновлённые данные карточки
-    //     newApi.changeLikeCardStatus(card._id, isLiked)
-    //     .then((newCard) => {
-    //         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    //     }).catch((err) => {
-    //         console.error(err);
-    //       });
-    // }
-    
-    // function handleCardDelete(card) {
-    //     const isOwn = card.owner._id === currentUser._id;
-    //     newApi.changeDeleteCardStatus(card._id)
-    //     .then((newCard) => {
-    //         setCards((cards) => cards.filter((c) => c._id !== card._id));
-    //     }).catch((err) => {
-    //         console.error(err);
-    //       });
-    // }
     
     return (
         <main className="content">
@@ -53,12 +31,14 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
                     type="button"
                     title="Добавить фотографию" />
             </section>
+           
             <section className="elements">
                 <ul class="elements__contain">
                     {cards.map((card) => {
                         return (<Card key={card._id} card={card} 
                             onCardClick={onCardClick} onCardLike={onCardLike}
-                            onCardDelete={onCardDelete} />)
+                            onCardDelete={onCardDelete} onDeletePopup={onDeletePopup} 
+                            onConfirmDelete={onConfirmDelete} setDeleteCard={setDeleteCard}/>)
                     })}
                 </ul>
             </section>

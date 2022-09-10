@@ -24,9 +24,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [liked, setLiked] = useState(false);
   const [deleteCard, setDeleteCard] = useState(false);
-  const [showCollection, setShowCollection] = useState(cards);
-  const [userName, setUserName] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -42,17 +40,9 @@ function App() {
     setIsAddPlaceClick(true);
   }
 
-  // const handleClickOnPopup = (e) => {
-  //   if (e.target.classList.contains('popup') || e.target.classList.contains('popup__close-button')) {
-  //     //закрытие попапа по клику на оверлей либо по клику на крестик
-  //     closeAllPopups();
-  //   }
-  // }
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
     // Отправляем запрос в API и получаем обновлённые данные карточки
     newApi.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
@@ -65,12 +55,12 @@ function App() {
 
   function handleCardDelete(card) {
     const isOwn = card.owner._id === currentUser._id;
-    newApi.changeDeleteCardStatus(card._id)
-      .then((newCard) => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id))
-      }).catch((err) => {
-        console.error(err);
-      });
+      newApi.changeDeleteCardStatus(card._id)
+        .then((newCard) => {
+          setCards((cards) => cards.filter((c) => c._id !== card._id))
+        }).catch((err) => {
+          console.error(err);
+        });
   }
 
   const handleAddPlaceSubmit = (card) => {
@@ -105,7 +95,6 @@ function App() {
         console.error(err);
       })
   }
-  console.log(cards)
 
   const closeAllPopups = () => {
     setIsEditAvatarClick(false);
@@ -128,15 +117,6 @@ function App() {
       })
   }, [liked]);
 
-  useEffect(() => {
-    newApi.changeDeleteCardStatus(deleteCard._id)
-      .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== deleteCard._id))
-      }).catch((err) => {
-        console.error(err);
-      });
-  }, [deleteCard])
-
   const closeByEsc = (e) => {
     if (e.key === 'Escape') {
       closeAllPopups()
@@ -154,7 +134,7 @@ function App() {
       document.addEventListener('keydown', closeByEsc);
       document.addEventListener('mousedown', closeByOverlay)
     }
-    return () => document.removeEventListener('keydown', closeByEsc);
+    return () => (document.removeEventListener('keydown', closeByEsc));
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
 
   return (
@@ -169,7 +149,10 @@ function App() {
             cards={cards}
             setCards={setCards}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete} />
+            onCardDelete={handleCardDelete}
+            onDeletePopup={setisRemoveCardPopupOpen}
+            onConfirmDelete={confirmDelete}
+            setDeleteCard={setDeleteCard} />
           <Footer />
         </div>
         <EditProfilePopup
@@ -184,14 +167,15 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit} />
-          <RemoveCardPopup
+        <RemoveCardPopup
           isOpen={isRemoveCardPopupOpen}
+          onClose={closeAllPopups}
+          onRemoveCardPopup={handleCardDelete}
+          deleteCard={deleteCard}
            />
-        {/* // <PopupWithForm name="confirmation" title="Вы уверены?" buttonText="Да" /> */}
-
         <ImagePopup
-        card={selectCard}
-        onClose={closeAllPopups} />
+          card={selectCard}
+          onClose={closeAllPopups} />
       </CurrentUserContext.Provider>
     </body>
   );

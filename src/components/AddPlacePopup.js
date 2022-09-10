@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
@@ -34,7 +34,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             minLength="2"
             maxLength="300"
             required=""
-            ref={cardRefName} />
+            ref={cardRefName}
+             />
           <span className="form__item-error" id="elements__name-error" />
           <input
             className="form__item"
