@@ -1,4 +1,15 @@
-function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onSubmit }) {
+import { useEffect } from 'react'
+
+function PopupWithForm({ name, title, children, isOpen, onClose, buttonText, onSubmit,
+    onCloseOverlay }) {
+    useEffect(() => {
+        if (isOpen) {
+          document.addEventListener('mousedown', onCloseOverlay);
+        } else {
+          document.removeEventListener('mousedown', onCloseOverlay);
+        }
+      }, [isOpen])
+
     return (
         <div className={`popup ${isOpen && 'popup_opened'}`} id={`popup-${name}`}>
             <div className="popup__container">

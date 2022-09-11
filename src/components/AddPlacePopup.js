@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, onCloseOverlay}) {
   const cardRefName = React.useRef()
   const cardRefLink = React.useRef()
 
@@ -15,7 +15,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   }
   
   return (
-    <PopupWithForm isOpen={isOpen} name="addPhoto" onClose={onClose} onSubmit={handleSubmit}>
+    <PopupWithForm isOpen={isOpen} name="addPhoto" onClose={onClose}
+    onSubmit={handleSubmit} onCloseOverlay={onCloseOverlay}>
       <div
         className="form"
         id="form_photo"
@@ -33,7 +34,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             placeholder="Название"
             minLength="2"
             maxLength="300"
-            required=""
+            required
             ref={cardRefName} />
           <span className="form__item-error" id="elements__name-error" />
           <input
@@ -42,7 +43,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             id="elements__image"
             name="link"
             placeholder="Ссылка на картинку"
-            required=""
+            required
             ref={cardRefLink} />
           <span className="form__item-error" id="elements__image-error" />
         </fieldset>

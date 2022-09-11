@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm"
 
-function RemoveCardPopup({ isOpen, onClose, onRemoveCardPopup, deleteCard }) {
+function RemoveCardPopup({ isOpen, onClose, onRemoveCardPopup, deleteCard, onCloseOverlay }) {
     function handleSubmit(e) {
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
@@ -12,6 +12,7 @@ function RemoveCardPopup({ isOpen, onClose, onRemoveCardPopup, deleteCard }) {
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
+            onCloseOverlay={onCloseOverlay}
             name="confirmation"
             title="Вы уверены?"
             buttonText="Да" />)

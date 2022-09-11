@@ -22,9 +22,9 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [liked, setLiked] = useState(false);
+  // const [liked, setLiked] = useState(false);
   const [deleteCard, setDeleteCard] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  // const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -54,13 +54,13 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const isOwn = card.owner._id === currentUser._id;
-      newApi.changeDeleteCardStatus(card._id)
-        .then((newCard) => {
-          setCards((cards) => cards.filter((c) => c._id !== card._id))
-        }).catch((err) => {
-          console.error(err);
-        });
+    // const isOwn = card.owner._id === currentUser._id;
+    newApi.changeDeleteCardStatus(card._id)
+      .then((newCard) => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id))
+      }).catch((err) => {
+        console.error(err);
+      });
   }
 
   const handleAddPlaceSubmit = (card) => {
@@ -115,7 +115,7 @@ function App() {
       .catch((err) => {
         console.error(err);
       })
-  }, [liked]);
+  }, []);
 
   const closeByEsc = (e) => {
     if (e.key === 'Escape') {
@@ -132,7 +132,7 @@ function App() {
   useEffect(() => {
     if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpened) {
       document.addEventListener('keydown', closeByEsc);
-      document.addEventListener('mousedown', closeByOverlay)
+      // document.addEventListener('mousedown', closeByOverlay)
     }
     return () => (document.removeEventListener('keydown', closeByEsc));
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
@@ -151,30 +151,34 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             onDeletePopup={setisRemoveCardPopupOpen}
-            onConfirmDelete={confirmDelete}
             setDeleteCard={setDeleteCard} />
           <Footer />
         </div>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser} />
+          onUpdateUser={handleUpdateUser}
+          onCloseOverlay={closeByOverlay} />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar} />
+          onUpdateAvatar={handleUpdateAvatar}
+          onCloseOverlay={closeByOverlay} />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit} />
+          onAddPlace={handleAddPlaceSubmit}
+          onCloseOverlay={closeByOverlay} />
         <RemoveCardPopup
           isOpen={isRemoveCardPopupOpen}
           onClose={closeAllPopups}
           onRemoveCardPopup={handleCardDelete}
-          deleteCard={deleteCard} />
+          deleteCard={deleteCard}
+          onCloseOverlay={closeByOverlay} />
         <ImagePopup
           card={selectCard}
-          onClose={closeAllPopups} />
+          onClose={closeAllPopups}
+          onCloseOverlay={closeByOverlay} />
       </CurrentUserContext.Provider>
     </div>
   );

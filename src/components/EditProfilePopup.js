@@ -2,10 +2,9 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, onCloseOverlay }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-  // const [value, setValue] = React.useState('');
   const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
 
   // После загрузки текущего пользователя из API
@@ -35,7 +34,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   return (
     <PopupWithForm isOpen={isOpen} name="profile" title="Редактировать профиль"
-      onSubmit={handleSubmit} onClose={onClose}>
+      onSubmit={handleSubmit} onClose={onClose}
+      onCloseOverlay={onCloseOverlay}>
         <div
         className="form"
         id="form_profile"
