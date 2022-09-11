@@ -1,4 +1,4 @@
-import React, {useEffect}  from "react";
+import React  from "react";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
 function Card({ card, onCardClick, onCardLike, onCardDelete, onDeletePopup, onConfirmDelete, setDeleteCard }) {
@@ -20,17 +20,17 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onDeletePopup, onCo
     }
 
     return (
-        <li class="elements__block">
+        <li className="elements__block">
             <button className={`${cardDeleteButtonClassName}`} onClick={() => { handleDelete(card) }}
                 type="button" aria-label="Удалить">
             </button>
-            <img src={card.link} alt={card.name} onClick={() => onCardClick(card)} class="elements__image photo__open-button" />
-            <div class="elements__item">
-                <h2 class="elements__name">{card.name}</h2>
-                <div class="elements__like-wrapper">
+            <img src={card.link} alt={card.name} onClick={() => onCardClick(card)} className="elements__image photo__open-button" />
+            <div className="elements__item">
+                <h2 className="elements__name">{card.name}</h2>
+                <div className="elements__like-wrapper">
                     <button className={cardLikeButtonClassName} onClick={() => onCardLike(card)}
                         type="button" aria-label="Лайк"></button>
-                    <span class="elements__like-counters">{card.likes.length}</span>
+                    <span className="elements__like-counters">{card.likes.length}</span>
                 </div>
             </div>
         </li>

@@ -138,7 +138,7 @@ function App() {
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
 
   return (
-    <body className="page">
+    <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page__wrapper">
           <Header />
@@ -171,13 +171,12 @@ function App() {
           isOpen={isRemoveCardPopupOpen}
           onClose={closeAllPopups}
           onRemoveCardPopup={handleCardDelete}
-          deleteCard={deleteCard}
-           />
+          deleteCard={deleteCard} />
         <ImagePopup
           card={selectCard}
           onClose={closeAllPopups} />
       </CurrentUserContext.Provider>
-    </body>
+    </div>
   );
 }
 

@@ -11,8 +11,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     }
 
     return (
-        <PopupWithForm isOpen={isOpen} name="avatar" onClose={onClose} onSubmit={handleSubmit}
-            children={<form
+        <PopupWithForm isOpen={isOpen} name="avatar" onClose={onClose} onSubmit={handleSubmit}>
+            <div
                 className="form"
                 id="form-avatar"
                 name="avatar"
@@ -30,7 +30,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                         ref={avatarRef} />
                     <span className="form__item-error" id="avatar__image-error" />
                 </fieldset>
-            </form>}>
+            </div>
         </PopupWithForm>
     )
 }

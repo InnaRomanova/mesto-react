@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
@@ -15,8 +15,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   }
   
   return (
-    <PopupWithForm isOpen={isOpen} name="addPhoto" onClose={onClose} onSubmit={handleSubmit}
-      children={<form
+    <PopupWithForm isOpen={isOpen} name="addPhoto" onClose={onClose} onSubmit={handleSubmit}>
+      <div
         className="form"
         id="form_photo"
         name="addPhoto"
@@ -34,8 +34,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             minLength="2"
             maxLength="300"
             required=""
-            ref={cardRefName}
-             />
+            ref={cardRefName} />
           <span className="form__item-error" id="elements__name-error" />
           <input
             className="form__item"
@@ -47,7 +46,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             ref={cardRefLink} />
           <span className="form__item-error" id="elements__image-error" />
         </fieldset>
-      </form>}>
+      </div>
     </PopupWithForm>
   )
 }

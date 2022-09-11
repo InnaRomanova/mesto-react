@@ -5,7 +5,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [value, setValue] = React.useState('');
+  // const [value, setValue] = React.useState('');
   const currentUser = React.useContext(CurrentUserContext);  // Подписка на контекст
 
   // После загрузки текущего пользователя из API
@@ -35,8 +35,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   return (
     <PopupWithForm isOpen={isOpen} name="profile" title="Редактировать профиль"
-      onSubmit={handleSubmit} onClose={onClose}
-      children={< form
+      onSubmit={handleSubmit} onClose={onClose}>
+        <div
         className="form"
         id="form_profile"
         name="profile"
@@ -51,7 +51,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             name="name"
             placeholder="Введите ваше имя"
             autoComplete="off"
-            defaultValue=""
             value={name || ''}
             minLength="2"
             maxLength="40"
@@ -67,17 +66,14 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             minLength="2"
             maxLength="200"
             autoComplete="off"
-            defaultValue=""
             value={description || ''}
             required=""
             onChange={handleChangeDescription} />
           <span className="form__item-error" id="profile__about-error" />
         </fieldset>
-      </form>}
-    />
-  );
+      </div>
+      </PopupWithForm>
+  )
 }
-
-
 
 export default EditProfilePopup;

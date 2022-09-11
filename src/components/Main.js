@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "./Card.js";
 import newApi from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
@@ -33,7 +33,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
             </section>
            
             <section className="elements">
-                <ul class="elements__contain">
+                <ul className="elements__contain">
                     {cards.map((card) => {
                         return (<Card key={card._id} card={card} 
                             onCardClick={onCardClick} onCardLike={onCardLike}
