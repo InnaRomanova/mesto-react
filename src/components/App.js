@@ -22,9 +22,7 @@ function App() {
   const [selectCard, setSelectCard] = useState({});
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  // const [liked, setLiked] = useState(false);
   const [deleteCard, setDeleteCard] = useState(false);
-  // const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleCardClick = (card) => {
     setSelectCard(card);
@@ -132,7 +130,6 @@ function App() {
   useEffect(() => {
     if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpened) {
       document.addEventListener('keydown', closeByEsc);
-      // document.addEventListener('mousedown', closeByOverlay)
     }
     return () => (document.removeEventListener('keydown', closeByEsc));
   }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isEditProfilePopupOpen, isImagePopupOpened]);
