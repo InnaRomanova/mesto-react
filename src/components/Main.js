@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "./Card.js";
-import newApi from "../utils/Api";
-import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
+import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardDelete, 
     onCardLike, onDeletePopup, onConfirmDelete, setDeleteCard }) {
@@ -38,7 +37,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
                         return (<Card key={card._id} card={card} 
                             onCardClick={onCardClick} onCardLike={onCardLike}
                             onCardDelete={onCardDelete} onDeletePopup={onDeletePopup} 
-                            onConfirmDelete={onConfirmDelete} setDeleteCard={setDeleteCard}/>)
+                            onConfirmDelete={onConfirmDelete} setDeleteCard={setDeleteCard} />)
                     })}
                 </ul>
             </section>

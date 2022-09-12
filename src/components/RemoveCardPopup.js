@@ -1,4 +1,4 @@
-import PopupWithForm from "./PopupWithForm"
+import PopupWithForm from "./PopupWithForm.js"
 
 function RemoveCardPopup({ isOpen, onClose, onRemoveCardPopup, deleteCard, onCloseOverlay }) {
     function handleSubmit(e) {

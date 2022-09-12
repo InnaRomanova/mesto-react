@@ -33,7 +33,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, onCloseOverlay}) {
             name="name"
             placeholder="Название"
             minLength="2"
-            maxLength="300"
+            maxLength="30"
             required
             ref={cardRefName} />
           <span className="form__item-error" id="elements__name-error" />
