@@ -27,7 +27,7 @@
 
 Запустить проект в режиме разработки
 <br>
-Для просмотра [откройте](http://localhost:3000) в браузере.
+Для просмотра [откройте](https://innaromanova.github.io/mesto-react) в браузере.
 
 #### `npm run build`
 
